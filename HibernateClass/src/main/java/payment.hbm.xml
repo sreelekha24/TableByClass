@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.techouts.hibernate.pojo.Payment" table="Payment"  discriminator-value="Payment">
+		<id name="payId">
+			<generator class="assigned"></generator>
+		</id>
+	    
+		
+		<discriminator column="PaymentType"></discriminator>
+		<property name="amount"></property>
+		<subclass name="com.techouts.hibernate.pojo.CreditCard" discriminator-value="CreditCard">
+			<property name="cardType"></property>
+		</subclass>
+		
+		<subclass name="com.techouts.hibernate.pojo.ChequePayment"  discriminator-value="ChequePayment">
+			<property name="chequetype"></property>
+		</subclass>
+	</class>
+</hibernate-mapping>
